@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma carta para o encontrista</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EEE0;
+    --card:#FFFCF5;
+    --ink:#2B241C;
+    --ink-soft:#5B5142;
+    --wine:#6B2338;
+    --wine-deep:#4E1A29;
+    --gold:#B98B3E;
+    --line:#E2D5BB;
+    --error:#A23B2E;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(185,139,62,0.08), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(107,35,56,0.07), transparent 40%),
+      var(--paper);
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    padding:48px 20px 80px;
+  }
+
+  .wrap{max-width:640px;margin:0 auto;}
+
+  header.hero{text-align:center;margin-bottom:36px;}
+  .eyebrow{
+    font-family:'Karla',sans-serif;
+    font-size:12px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--wine);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(30px,5vw,42px);
+    line-height:1.15;
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--wine);
+  }
+  .sub{
+    font-size:15.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    max-width:460px;
+    margin:0 auto;
+  }
+
+  /* ===== Envelope card ===== */
+  .envelope{
+    position:relative;
+    margin-top:44px;
+  }
+  .flap{
+    height:90px;
+    background:linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+    clip-path:polygon(0 0, 100% 0, 50% 100%);
+    border-radius:14px 14px 0 0;
+    position:relative;
+    z-index:1;
+  }
+  .seal{
+    position:absolute;
+    left:50%;
+    top:56px;
+    transform:translateX(-50%);
+    width:56px;height:56px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #D4A44E, var(--gold) 55%, #8C6222 100%);
+    box-shadow:0 6px 14px rgba(75,45,10,0.35), inset 0 2px 3px rgba(255,255,255,0.35);
+    display:flex;align-items:center;justify-content:center;
+    z-index:2;
+  }
+  .seal svg{width:24px;height:24px;fill:#fffaf0;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:none;
+    border-radius:0 0 14px 14px;
+    padding:56px 40px 40px;
+    box-shadow:0 18px 40px -22px rgba(43,36,28,0.35);
+  }
+  @media (max-width:520px){ .card{padding:52px 22px 30px;} }
+
+  fieldset{border:0;padding:0;margin:0 0 26px;}
+  label{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:8px;
+  }
+  .req{color:var(--wine); font-weight:700;}
+  .opt{
+    font-family:'Karla',sans-serif;
+    font-weight:400;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+  .hint{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5;}
+
+  select, textarea{
+    width:100%;
+    font-family:'Karla',sans-serif;
+    font-size:15px;
+    color:var(--ink);
+    background:#fff;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:13px 14px;
+    outline:none;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  select:focus, textarea:focus{
+    border-color:var(--wine);
+    box-shadow:0 0 0 3px rgba(107,35,56,0.12);
+  }
+  select{appearance:none; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%236B2338' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    padding-right:40px;
+  }
+  textarea{resize:vertical;min-height:120px;line-height:1.6;font-family:'Fraunces',serif;font-size:16px;}
+  textarea::placeholder{color:#B7AC97;font-style:italic;}
+
+  /* dropzone */
+  .dropzone{
+    border:1.5px dashed var(--line);
+    border-radius:12px;
+    background:#FBF7ED;
+    padding:26px 18px;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .dropzone.drag{border-color:var(--wine); background:#F6ECE3;}
+  .dropzone svg{width:28px;height:28px;stroke:var(--wine);margin-bottom:8px;}
+  .dropzone p{margin:0;font-size:14px;color:var(--ink-soft);}
+  .dropzone p strong{color:var(--wine);}
+  .dropzone input{display:none;}
+
+  .filelist{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+  .fileitem{
+    display:flex;align-items:center;gap:10px;
+    background:#fff;border:1px solid var(--line);border-radius:9px;
+    padding:8px 10px;font-size:13.5px;color:var(--ink);
+  }
+  .fileitem img{width:34px;height:34px;object-fit:cover;border-radius:6px;flex-shrink:0;}
+  .fileitem .fdoc{
+    width:34px;height:34px;border-radius:6px;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    font-size:10px;font-weight:700;color:var(--wine);
+  }
+  .fileitem .fname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .fileitem button{
+    border:none;background:none;color:var(--ink-soft);cursor:pointer;font-size:16px;
+    line-height:1;padding:2px 4px;
+  }
+  .fileitem button:hover{color:var(--error);}
+
+  button[type="submit"]{
+    width:100%;
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:16.5px;
+    letter-spacing:.01em;
+    color:#fff;
+    background:linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+    border:none;
+    border-radius:12px;
+    padding:16px;
+    cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+    box-shadow:0 10px 24px -12px rgba(107,35,56,0.55);
+  }
+  button[type="submit"]:hover{transform:translateY(-1px);}
+  button[type="submit"]:disabled{opacity:.65;cursor:default;transform:none;}
+  button[type="submit"] svg{width:17px;height:17px;fill:#fff;}
+
+  .status{
+    margin-top:14px;
+    font-size:13.5px;
+    text-align:center;
+    color:var(--error);
+    display:none;
+  }
+  .status.show{display:block;}
+
+  /* success state */
+  .success{
+    display:none;
+    text-align:center;
+    padding:26px 10px 6px;
+  }
+  .success.show{display:block;}
+  .success .wax{
+    width:64px;height:64px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #D4A44E, var(--gold) 55%, #8C6222 100%);
+    margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 18px rgba(75,45,10,0.3);
+    animation:pop .5s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes pop{from{transform:scale(0.4);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .success .wax svg{width:28px;height:28px;fill:#fffaf0;}
+  .success h2{font-family:'Fraunces',serif;font-size:24px;margin:0 0 8px;}
+  .success p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0 0 20px;}
+  .success button.again{
+    background:none;border:1.5px solid var(--wine);color:var(--wine);
+    font-family:'Karla',sans-serif;font-weight:600;font-size:13.5px;
+    padding:10px 20px;border-radius:9px;cursor:pointer;
+  }
+
+  footer{text-align:center;margin-top:26px;font-size:12px;color:#B7AC97;}
+
+  @media (prefers-reduced-motion: reduce){
+    .success .wax{animation:none;}
+    button[type="submit"]:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Correspondência do encontro</div>
+    <h1>Escreva uma <em>carta</em><br>para quem você ama</h1>
+    <p class="sub">Preencha os campos abaixo. Sua mensagem e suas fotos serão entregues com carinho ao encontrista.</p>
+  </header>
+
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="seal">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.4 4c2-.3 3.7.7 4.6 2.2C10.9 4.7 12.6 3.7 14.6 4c3.4.5 5 4.1 3.4 7.7C15.5 16.4 12 21 12 21z"/></svg>
+    </div>
+
+    <div class="card">
+
+      <form id="cartaForm">
+        <fieldset>
+          <label for="nome">Nome do encontrista <span class="req">*</span></label>
+          <select id="nome" name="nome" required>
+            <option value="" disabled selected>Carregando lista…</option>
+          </select>
+          <p class="hint" id="nomeHint"></p>
+        </fieldset>
+
+        <fieldset>
+          <label for="parentesco">Qual o seu grau de parentesco <span class="req">*</span></label>
+          <select id="parentesco" name="parentesco" required>
+            <option value="" disabled selected>Selecione uma opção</option>
+            <option>Pai</option>
+            <option>Mãe</option>
+            <option>Irmão(a)</option>
+            <option>Tio(a)</option>
+            <option>Discipulador(a)</option>
+            <option>Filho(a)</option>
+            <option>Líder de célula</option>
+            <option>Pastor(a)</option>
+            <option>Amigo(a)</option>
+            <option>Primo(a)</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <label for="mensagem">O que você gostaria de dizer ao encontrista <span class="opt">Opcional</span></label>
+          <textarea id="mensagem" name="mensagem" placeholder="Escreva do coração…"></textarea>
+        </fieldset>
+
+        <fieldset>
+          <label>Fotos ou documento <span class="opt">Opcional</span></label>
+          <div class="dropzone" id="dropzone">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+            <p><strong>Toque para escolher arquivos</strong><br>fotos, PDF ou documento</p>
+            <input type="file" id="arquivos" multiple accept="image/*,.pdf,.doc,.docx">
+          </div>
+          <div class="filelist" id="filelist"></div>
+        </fieldset>
+
+        <button type="submit" id="btnEnviar">
+          <svg viewBox="0 0 24 24"><path d="M2 3l19 9-19 9 4-9-4-9z"/></svg>
+          Enviar carta
+        </button>
+        <p class="status" id="statusMsg"></p>
+      </form>
+
+      <div class="success" id="successBox">
+        <div class="wax"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h2>Carta enviada!</h2>
+        <p>Obrigado por dedicar um tempo para escrever ao encontrista. Sua mensagem já foi entregue.</p>
+        <button class="again" id="btnOutra">Escrever outra carta</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>Feito com carinho para o encontro</footer>
+</div>
+
+<script>
+  // ⚠️ CONFIGURAÇÃO OBRIGATÓRIA ⚠️
+  // Cole aqui a URL do seu Google Apps Script implantado como "App da Web".
+  // Veja o passo a passo no arquivo INSTRUCOES.md
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqQymv5EXawzr4P-HRTS2kzRVgSvPC0sM3rVnRHoAw6o2q4aSW0XS0CGvOsKgCxprsjw/exec";
+
+  const form = document.getElementById('cartaForm');
+  const nomeSelect = document.getElementById('nome');
+  const nomeHint = document.getElementById('nomeHint');
+  const dropzone = document.getElementById('dropzone');
+  const inputArquivos = document.getElementById('arquivos');
+  const filelist = document.getElementById('filelist');
+  const statusMsg = document.getElementById('statusMsg');
+  const btnEnviar = document.getElementById('btnEnviar');
+  const successBox = document.getElementById('successBox');
+  const btnOutra = document.getElementById('btnOutra');
+
+  let arquivosSelecionados = [];
+  const LIMITE_TOTAL_MB = 20;
+
+  // ---- Carrega a lista de encontristas ----
+  async function carregarNomes(){
+    try{
+      const resp = await fetch(APPS_SCRIPT_URL);
+      const nomes = await resp.json();
+      nomeSelect.innerHTML = '<option value="" disabled selected>Selecione o nome</option>';
+      nomes.forEach(n => {
+        const opt = document.createElement('option');
+        opt.value = n; opt.textContent = n;
+        nomeSelect.appendChild(opt);
+      });
+    }catch(err){
+      nomeSelect.innerHTML = '<option value="" disabled selected>Não foi possível carregar</option>';
+      nomeHint.textContent = 'Não conseguimos carregar a lista de nomes. Verifique a conexão e recarregue a página.';
+    }
+  }
+  carregarNomes();
+
+  // ---- Área de arquivos ----
+  dropzone.addEventListener('click', () => inputArquivos.click());
+  ['dragenter','dragover'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.add('drag');
+  }));
+  ['dragleave','drop'].forEach(ev => dropzone.addEventListener(ev, e => {
+    e.preventDefault(); dropzone.classList.remove('drag');
+  }));
+  dropzone.addEventListener('drop', e => adicionarArquivos(e.dataTransfer.files));
+  inputArquivos.addEventListener('change', e => adicionarArquivos(e.target.files));
+
+  function adicionarArquivos(fileListRaw){
+    Array.from(fileListRaw).forEach(f => arquivosSelecionados.push(f));
+    renderFileList();
+  }
+
+  function removerArquivo(idx){
+    arquivosSelecionados.splice(idx,1);
+    renderFileList();
+  }
+
+  function renderFileList(){
+    filelist.innerHTML = '';
+    arquivosSelecionados.forEach((f, idx) => {
+      const item = document.createElement('div');
+      item.className = 'fileitem';
+      if(f.type.startsWith('image/')){
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(f);
+        item.appendChild(img);
+      }else{
+        const box = document.createElement('div');
+        box.className = 'fdoc';
+        box.textContent = (f.name.split('.').pop()||'DOC').slice(0,4).toUpperCase();
+        item.appendChild(box);
+      }
+      const name = document.createElement('div');
+      name.className = 'fname';
+      name.textContent = f.name;
+      item.appendChild(name);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.innerHTML = '✕';
+      btn.onclick = () => removerArquivo(idx);
+      item.appendChild(btn);
+
+      filelist.appendChild(item);
+    });
+  }
+
+  function fileParaBase64(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function mostrarErro(msg){
+    statusMsg.textContent = msg;
+    statusMsg.classList.add('show');
+  }
+  function limparErro(){
+    statusMsg.textContent = '';
+    statusMsg.classList.remove('show');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    limparErro();
+
+    if(APPS_SCRIPT_URL.includes('COLE_AQUI')){
+      mostrarErro('O site ainda não foi configurado. Cole a URL do Apps Script no código (veja INSTRUCOES.md).');
+      return;
+    }
+
+    const tamanhoTotal = arquivosSelecionados.reduce((s,f)=>s+f.size,0) / (1024*1024);
+    if(tamanhoTotal > LIMITE_TOTAL_MB){
+      mostrarErro('Os arquivos juntos passam de ' + LIMITE_TOTAL_MB + ' MB. Remova algum arquivo e tente novamente.');
+      return;
+    }
+
+    btnEnviar.disabled = true;
+    btnEnviar.textContent = 'Enviando…';
+
+    try{
+      const arquivosBase64 = await Promise.all(arquivosSelecionados.map(async f => ({
+        nome: f.name,
+        tipo: f.type || 'application/octet-stream',
+        conteudo: await fileParaBase64(f)
+      })));
+
+      const payload = {
+        nomeEncontrista: nomeSelect.value,
+        parentesco: document.getElementById('parentesco').value,
+        mensagem: document.getElementById('mensagem').value,
+        arquivos: arquivosBase64
+      };
+
+      const resp = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const resultado = await resp.json();
+
+      if(resultado.ok){
+        form.style.display = 'none';
+        successBox.classList.add('show');
+      }else{
+        mostrarErro('Não foi possível enviar. Tente novamente em instantes.');
+      }
+    }catch(err){
+      mostrarErro('Erro de conexão. Verifique a internet e tente novamente.');
+    }finally{
+      btnEnviar.disabled = false;
+      btnEnviar.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2 3l19 9-19 9 4-9-4-9z"/></svg> Enviar carta';
+    }
+  });
+
+  btnOutra.addEventListener('click', () => {
+    form.reset();
+    arquivosSelecionados = [];
+    renderFileList();
+    successBox.classList.remove('show');
+    form.style.display = 'block';
+  });
+</script>
+</body>
+</html>
