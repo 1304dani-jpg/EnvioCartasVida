@@ -6,28 +6,28 @@
 <title>Uma carta para o encontrista</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --paper:#F5EEE0;
-    --card:#FFFCF5;
-    --ink:#2B241C;
-    --ink-soft:#5B5142;
-    --wine:#6B2338;
-    --wine-deep:#4E1A29;
-    --gold:#B98B3E;
-    --line:#E2D5BB;
-    --error:#A23B2E;
+    --bg:#0A0A0C;
+    --panel:#141416;
+    --panel-2:#1C1C1F;
+    --ink:#F5F4F0;
+    --ink-soft:#A6A6AC;
+    --line:#2B2B2F;
+    --accent:#E3B23C;
+    --accent-deep:#B9862B;
+    --error:#FF6B5E;
   }
 
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:
-      radial-gradient(circle at 15% 10%, rgba(185,139,62,0.08), transparent 45%),
-      radial-gradient(circle at 85% 90%, rgba(107,35,56,0.07), transparent 40%),
-      var(--paper);
-    font-family:'Karla', sans-serif;
+      radial-gradient(circle at 12% 0%, rgba(227,178,60,0.10), transparent 40%),
+      radial-gradient(circle at 90% 100%, rgba(227,178,60,0.06), transparent 40%),
+      var(--bg);
+    font-family:'Inter', sans-serif;
     color:var(--ink);
     min-height:100vh;
     padding:48px 20px 80px;
@@ -36,27 +36,39 @@
   .wrap{max-width:640px;margin:0 auto;}
 
   header.hero{text-align:center;margin-bottom:36px;}
-  .eyebrow{
-    font-family:'Karla',sans-serif;
-    font-size:12px;
-    letter-spacing:.22em;
+  .brand{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Anton', sans-serif;
+    letter-spacing:.04em;
+    font-size:15px;
+    color:var(--ink-soft);
     text-transform:uppercase;
-    color:var(--wine);
+    margin-bottom:22px;
+  }
+  .brand span{color:var(--accent);}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--accent);
     font-weight:700;
-    margin-bottom:10px;
+    margin-bottom:14px;
   }
   h1{
-    font-family:'Fraunces', serif;
-    font-weight:600;
-    font-size:clamp(30px,5vw,42px);
-    line-height:1.15;
-    margin:0 0 12px;
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:clamp(34px,7vw,54px);
+    line-height:1.02;
+    letter-spacing:.01em;
+    margin:0 0 16px;
     color:var(--ink);
   }
   h1 em{
-    font-style:italic;
-    font-weight:500;
-    color:var(--wine);
+    font-style:normal;
+    color:var(--accent);
   }
   .sub{
     font-size:15.5px;
@@ -66,115 +78,102 @@
     margin:0 auto;
   }
 
-  /* ===== Envelope card ===== */
+  /* ===== Card ===== */
   .envelope{
     position:relative;
-    margin-top:44px;
+    margin-top:40px;
   }
-  .flap{
-    height:90px;
-    background:linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
-    clip-path:polygon(0 0, 100% 0, 50% 100%);
+  .bar{
+    height:6px;
+    background:linear-gradient(90deg, var(--accent) 0%, var(--accent-deep) 100%);
     border-radius:14px 14px 0 0;
-    position:relative;
-    z-index:1;
   }
-  .seal{
-    position:absolute;
-    left:50%;
-    top:56px;
-    transform:translateX(-50%);
-    width:56px;height:56px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #D4A44E, var(--gold) 55%, #8C6222 100%);
-    box-shadow:0 6px 14px rgba(75,45,10,0.35), inset 0 2px 3px rgba(255,255,255,0.35);
-    display:flex;align-items:center;justify-content:center;
-    z-index:2;
-  }
-  .seal svg{width:24px;height:24px;fill:#fffaf0;}
 
   .card{
-    background:var(--card);
+    background:var(--panel);
     border:1px solid var(--line);
     border-top:none;
-    border-radius:0 0 14px 14px;
-    padding:56px 40px 40px;
-    box-shadow:0 18px 40px -22px rgba(43,36,28,0.35);
+    border-radius:0 0 16px 16px;
+    padding:44px 40px 40px;
+    box-shadow:0 24px 50px -26px rgba(0,0,0,0.6);
   }
-  @media (max-width:520px){ .card{padding:52px 22px 30px;} }
+  @media (max-width:520px){ .card{padding:36px 22px 30px;} }
 
   fieldset{border:0;padding:0;margin:0 0 26px;}
   label{
     display:block;
-    font-family:'Fraunces', serif;
-    font-size:15px;
-    font-weight:600;
+    font-family:'Inter', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.03em;
     color:var(--ink);
-    margin-bottom:8px;
+    margin-bottom:9px;
   }
-  .req{color:var(--wine); font-weight:700;}
+  .req{color:var(--accent); font-weight:700;}
   .opt{
-    font-family:'Karla',sans-serif;
-    font-weight:400;
-    font-size:12px;
+    font-weight:500;
+    font-size:11px;
     color:var(--ink-soft);
     text-transform:uppercase;
     letter-spacing:.06em;
   }
   .hint{font-size:12.5px;color:var(--ink-soft);margin:6px 0 0;line-height:1.5;}
 
-  select, textarea{
+  input[type="text"], select, textarea{
     width:100%;
-    font-family:'Karla',sans-serif;
+    font-family:'Inter',sans-serif;
     font-size:15px;
     color:var(--ink);
-    background:#fff;
+    background:var(--panel-2);
     border:1.5px solid var(--line);
     border-radius:10px;
     padding:13px 14px;
     outline:none;
     transition:border-color .15s ease, box-shadow .15s ease;
   }
-  select:focus, textarea:focus{
-    border-color:var(--wine);
-    box-shadow:0 0 0 3px rgba(107,35,56,0.12);
+  input[type="text"]::placeholder{color:#6E6E74;}
+  input[type="text"]:focus, select:focus, textarea:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(227,178,60,0.16);
   }
   select{appearance:none; cursor:pointer;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%236B2338' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%23E3B23C' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat;
     background-position:right 16px center;
     padding-right:40px;
   }
-  textarea{resize:vertical;min-height:120px;line-height:1.6;font-family:'Fraunces',serif;font-size:16px;}
-  textarea::placeholder{color:#B7AC97;font-style:italic;}
+  select option{background:var(--panel-2); color:var(--ink);}
+  textarea{resize:vertical;min-height:120px;line-height:1.6;font-size:15.5px;}
+  textarea::placeholder{color:#6E6E74;font-style:italic;}
 
   /* dropzone */
   .dropzone{
     border:1.5px dashed var(--line);
     border-radius:12px;
-    background:#FBF7ED;
+    background:var(--panel-2);
     padding:26px 18px;
     text-align:center;
     cursor:pointer;
     transition:border-color .15s ease, background .15s ease;
   }
-  .dropzone.drag{border-color:var(--wine); background:#F6ECE3;}
-  .dropzone svg{width:28px;height:28px;stroke:var(--wine);margin-bottom:8px;}
+  .dropzone.drag{border-color:var(--accent); background:#242419;}
+  .dropzone svg{width:28px;height:28px;stroke:var(--accent);margin-bottom:8px;}
   .dropzone p{margin:0;font-size:14px;color:var(--ink-soft);}
-  .dropzone p strong{color:var(--wine);}
+  .dropzone p strong{color:var(--accent);}
   .dropzone input{display:none;}
 
   .filelist{margin-top:14px;display:flex;flex-direction:column;gap:8px;}
   .fileitem{
     display:flex;align-items:center;gap:10px;
-    background:#fff;border:1px solid var(--line);border-radius:9px;
+    background:var(--panel-2);border:1px solid var(--line);border-radius:9px;
     padding:8px 10px;font-size:13.5px;color:var(--ink);
   }
   .fileitem img{width:34px;height:34px;object-fit:cover;border-radius:6px;flex-shrink:0;}
   .fileitem .fdoc{
-    width:34px;height:34px;border-radius:6px;background:var(--paper);
+    width:34px;height:34px;border-radius:6px;background:var(--bg);
     display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    font-size:10px;font-weight:700;color:var(--wine);
+    font-size:10px;font-weight:700;color:var(--accent);
   }
   .fileitem .fname{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .fileitem button{
@@ -185,23 +184,24 @@
 
   button[type="submit"]{
     width:100%;
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    font-size:16.5px;
-    letter-spacing:.01em;
-    color:#fff;
-    background:linear-gradient(160deg, var(--wine) 0%, var(--wine-deep) 100%);
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+    font-size:17px;
+    color:#181206;
+    background:linear-gradient(160deg, var(--accent) 0%, var(--accent-deep) 100%);
     border:none;
     border-radius:12px;
     padding:16px;
     cursor:pointer;
     display:flex;align-items:center;justify-content:center;gap:10px;
     transition:transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-    box-shadow:0 10px 24px -12px rgba(107,35,56,0.55);
+    box-shadow:0 10px 24px -12px rgba(227,178,60,0.45);
   }
   button[type="submit"]:hover{transform:translateY(-1px);}
   button[type="submit"]:disabled{opacity:.65;cursor:default;transform:none;}
-  button[type="submit"] svg{width:17px;height:17px;fill:#fff;}
+  button[type="submit"] svg{width:17px;height:17px;fill:#181206;}
 
   .status{
     margin-top:14px;
@@ -221,23 +221,24 @@
   .success.show{display:block;}
   .success .wax{
     width:64px;height:64px;border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #D4A44E, var(--gold) 55%, #8C6222 100%);
+    background:linear-gradient(160deg, var(--accent) 0%, var(--accent-deep) 100%);
     margin:0 auto 18px;
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 18px rgba(75,45,10,0.3);
+    box-shadow:0 8px 18px rgba(0,0,0,0.4);
     animation:pop .5s cubic-bezier(.34,1.56,.64,1);
   }
   @keyframes pop{from{transform:scale(0.4);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .success .wax svg{width:28px;height:28px;fill:#fffaf0;}
-  .success h2{font-family:'Fraunces',serif;font-size:24px;margin:0 0 8px;}
+  .success .wax svg{width:28px;height:28px;fill:#181206;}
+  .success h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:26px;margin:0 0 8px;font-weight:400;}
   .success p{color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0 0 20px;}
   .success button.again{
-    background:none;border:1.5px solid var(--wine);color:var(--wine);
-    font-family:'Karla',sans-serif;font-weight:600;font-size:13.5px;
+    background:none;border:1.5px solid var(--accent);color:var(--accent);
+    font-family:'Inter',sans-serif;font-weight:700;font-size:13.5px;
     padding:10px 20px;border-radius:9px;cursor:pointer;
+    text-transform:uppercase;letter-spacing:.03em;
   }
 
-  footer{text-align:center;margin-top:26px;font-size:12px;color:#B7AC97;}
+  footer{text-align:center;margin-top:26px;font-size:12px;color:#5A5A5F;}
 
   @media (prefers-reduced-motion: reduce){
     .success .wax{animation:none;}
@@ -249,20 +250,23 @@
 
 <div class="wrap">
   <header class="hero">
+    <div class="brand">Igreja Batista <span>Atitude</span></div>
     <div class="eyebrow">Correspondência do encontro</div>
     <h1>Escreva uma <em>carta</em><br>para quem você ama</h1>
     <p class="sub">Preencha os campos abaixo. Sua mensagem e suas fotos serão entregues com carinho ao encontrista.</p>
   </header>
 
   <div class="envelope">
-    <div class="flap"></div>
-    <div class="seal">
-      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.3C.4 8.1 2 4.5 5.4 4c2-.3 3.7.7 4.6 2.2C10.9 4.7 12.6 3.7 14.6 4c3.4.5 5 4.1 3.4 7.7C15.5 16.4 12 21 12 21z"/></svg>
-    </div>
+    <div class="bar"></div>
 
     <div class="card">
 
       <form id="cartaForm">
+        <fieldset>
+          <label for="remetente">De: (informe seu nome e sobrenome) <span class="req">*</span></label>
+          <input type="text" id="remetente" name="remetente" placeholder="Seu nome completo" required>
+        </fieldset>
+
         <fieldset>
           <label for="nome">Nome do encontrista <span class="req">*</span></label>
           <select id="nome" name="nome" required>
@@ -330,6 +334,7 @@
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzqQymv5EXawzr4P-HRTS2kzRVgSvPC0sM3rVnRHoAw6o2q4aSW0XS0CGvOsKgCxprsjw/exec";
 
   const form = document.getElementById('cartaForm');
+  const remetenteInput = document.getElementById('remetente');
   const nomeSelect = document.getElementById('nome');
   const nomeHint = document.getElementById('nomeHint');
   const dropzone = document.getElementById('dropzone');
@@ -456,6 +461,7 @@
       })));
 
       const payload = {
+        remetente: remetenteInput.value,
         nomeEncontrista: nomeSelect.value,
         parentesco: document.getElementById('parentesco').value,
         mensagem: document.getElementById('mensagem').value,
