@@ -268,6 +268,11 @@
         </fieldset>
 
         <fieldset>
+          <label for="telefone">Informe seu telefone: <span class="req">*</span></label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+        </fieldset>
+
+        <fieldset>
           <label for="nome">Nome do encontrista <span class="req">*</span></label>
           <select id="nome" name="nome" required>
             <option value="" disabled selected>Carregando lista…</option>
@@ -276,22 +281,23 @@
         </fieldset>
 
         <fieldset>
-          <label for="parentesco">Qual o seu grau de parentesco <span class="req">*</span></label>
+          <label for="parentesco">Para identificarmos sua carta, informe o que você é do encontrista: <span class="req">*</span></label>
           <select id="parentesco" name="parentesco" required>
             <option value="" disabled selected>Selecione uma opção</option>
             <option>Pai</option>
             <option>Mãe</option>
             <option>Irmão(a)</option>
-            <option>Filho(a)</option>
-             <option>Namorado(a)</option>
             <option>Tio(a)</option>
-            <option>Primo(a)</option>
-            <option>Avô/Avó</option>
             <option>Discipulador(a)</option>
+            <option>Filho(a)</option>
             <option>Líder de célula</option>
             <option>Pastor(a)</option>
             <option>Amigo(a)</option>
-            
+            <option>Primo(a)</option>
+            <option>Namorado(a)</option>
+            <option>Sobrinho(a)</option>
+            <option>Neto(a)</option>
+            <option>Outro</option>
           </select>
         </fieldset>
 
@@ -465,6 +471,7 @@
 
       const payload = {
         remetente: remetenteInput.value,
+        telefone: document.getElementById('telefone').value,
         nomeEncontrista: nomeSelect.value,
         parentesco: document.getElementById('parentesco').value,
         mensagem: document.getElementById('mensagem').value,
