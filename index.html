@@ -478,11 +478,16 @@
         arquivos: arquivosBase64
       };
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90s de limite
+
       const resp = await fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: controller.signal
       });
+      clearTimeout(timeoutId);
       const resultado = await resp.json();
 
       if(resultado.ok){
@@ -492,7 +497,11 @@
         mostrarErro('Não foi possível enviar. Tente novamente em instantes.');
       }
     }catch(err){
-      mostrarErro('Erro de conexão. Verifique a internet e tente novamente.');
+      if(err.name === 'AbortError'){
+        mostrarErro('O envio demorou demais e foi cancelado. Verifique sua internet e tente novamente com menos arquivos, se possível.');
+      }else{
+        mostrarErro('Erro de conexão. Verifique a internet e tente novamente.');
+      }
     }finally{
       btnEnviar.disabled = false;
       btnEnviar.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2 3l19 9-19 9 4-9-4-9z"/></svg> Enviar carta';
